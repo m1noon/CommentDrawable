@@ -20,13 +20,15 @@ public class CommentDrawable extends ShapeDrawable {
         private Context context;
 
         private ArrowType arrowType = ArrowType.BOTTOM;
+        private ArrowGravity arrowGravity = ArrowGravity.CENTER;
         private float rectRadius;
-        private float triangleHeight;
-        private float triangleWidth;
-        private float triangleRadius;
+        private float arrowHeight;
+        private float arrowWidth;
+        private float arrowRadius;
         private int color;
         private float lineWidth;
         private int lineColor;
+        private float arrowOffset;
 
         public Builder(Context context) {
             this.context = context;
@@ -39,17 +41,17 @@ public class CommentDrawable extends ShapeDrawable {
         }
 
         public Builder triangleHeight(@DimenRes int dimenRes) {
-            triangleHeight = context.getResources().getDimension(dimenRes);
+            arrowHeight = context.getResources().getDimension(dimenRes);
             return this;
         }
 
         public Builder triangleWidth(@DimenRes int dimenRes) {
-            triangleWidth = context.getResources().getDimension(dimenRes);
+            arrowWidth = context.getResources().getDimension(dimenRes);
             return this;
         }
 
         public Builder triangleRadius(@DimenRes int dimenRes) {
-            triangleRadius = context.getResources().getDimension(dimenRes);
+            arrowRadius = context.getResources().getDimension(dimenRes);
             return this;
         }
 
@@ -73,8 +75,21 @@ public class CommentDrawable extends ShapeDrawable {
             return this;
         }
 
+        public Builder arrowGravity(ArrowGravity arrowGravity) {
+            this.arrowGravity = arrowGravity;
+            return this;
+        }
+
+        public Builder arrowOffset(@DimenRes int offsetRes) {
+            this.arrowOffset = context.getResources().getDimension(offsetRes);
+            return this;
+        }
+
         public ShapeDrawable build() {
-            return new ShapeDrawable(new CommentShape(color, lineColor, lineWidth, arrowType, rectRadius, triangleHeight, triangleWidth, triangleRadius));
+            return new ShapeDrawable(new CommentShape(color, lineColor, lineWidth,
+                    new PathMaker(arrowType.rectPathMaker(arrowHeight, rectRadius, lineWidth),
+                            arrowType.arrowPathMaker(arrowHeight, arrowWidth, arrowRadius, lineWidth),
+                            arrowGravity.arrowPositionMaker(arrowOffset == 0 ? arrowWidth * 2 : arrowOffset, arrowType))));
         }
 
     }

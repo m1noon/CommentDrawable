@@ -13,7 +13,17 @@ public enum ArrowType {
     BOTTOM {
         @Override
         protected RectPathMaker rectPathMaker(float arrowHeight, float rectRadius, float lineWidth) {
-            return new RectPathMaker(0, 0, 0, arrowHeight, rectRadius, lineWidth);
+            return new RectPathMaker(0, 0, 0, arrowHeight, rectRadius, lineWidth) {
+                @Override
+                protected void make(Path path, RectF rect, float center, float arrowWidth) {
+                    path.moveTo(center - arrowWidth / 2, bottom());
+                    bottomLeft(rect, path);
+                    topLeft(rect, path);
+                    topRight(rect, path);
+                    bottomRight(rect, path);
+                    path.lineTo(center + arrowWidth / 2, bottom());
+                }
+            };
         }
 
         @Override
@@ -26,32 +36,21 @@ public enum ArrowType {
                 }
             };
         }
-
-        @Override
-        protected PathMaker pathMaker(RectPathMaker rectPathMaker, ArrowPathMaker arrowPathMaker) {
-            return new PathMaker(rectPathMaker, arrowPathMaker) {
-                @Override
-                void make(float width, float height, final float centerX) {
-                    // draw rect
-                    path.rewind();
-                    path.moveTo(centerX - arrowPathMaker.width() / 2, rectPathMaker.bottom());
-                    rectPathMaker.bottomLeft(rect, path);
-                    rectPathMaker.topLeft(rect, path);
-                    rectPathMaker.topRight(rect, path);
-                    rectPathMaker.bottomRight(rect, path);
-                    path.lineTo(centerX + arrowPathMaker.width() / 2, rectPathMaker.bottom());
-
-                    // draw triangle
-                    arrowPathMaker.make(rect, path, centerX);
-                    path.close();
-                }
-            };
-        }
     },
     LEFT {
         @Override
         protected RectPathMaker rectPathMaker(float arrowHeight, float rectRadius, float lineWidth) {
-            return new RectPathMaker(arrowHeight, 0, 0, 0, rectRadius, lineWidth);
+            return new RectPathMaker(arrowHeight, 0, 0, 0, rectRadius, lineWidth) {
+                @Override
+                protected void make(Path path, RectF rect, float center, float arrowWidth) {
+                    path.moveTo(left(), center - arrowWidth / 2);
+                    topLeft(rect, path);
+                    topRight(rect, path);
+                    bottomRight(rect, path);
+                    bottomLeft(rect, path);
+                    path.lineTo(left(), center + arrowWidth / 2);
+                }
+            };
         }
 
         @Override
@@ -64,33 +63,21 @@ public enum ArrowType {
                 }
             };
         }
-
-        @Override
-        protected PathMaker pathMaker(RectPathMaker rectPathMaker, ArrowPathMaker arrowPathMaker) {
-            return new PathMaker(rectPathMaker, arrowPathMaker) {
-                @Override
-                protected void make(float width, float height, float center) {
-                    // draw rect
-                    center = height / 2;
-                    path.rewind();
-                    path.moveTo(rectPathMaker.left(), center - arrowPathMaker.width() / 2);
-                    rectPathMaker.topLeft(rect, path);
-                    rectPathMaker.topRight(rect, path);
-                    rectPathMaker.bottomRight(rect, path);
-                    rectPathMaker.bottomLeft(rect, path);
-                    path.lineTo(rectPathMaker.left, center + arrowPathMaker.width() / 2);
-
-                    // draw triangle
-                    arrowPathMaker.make(rect, path, center);
-                    path.close();
-                }
-            };
-        }
     },
     RIGHT {
         @Override
         protected RectPathMaker rectPathMaker(float arrowHeight, float rectRadius, float lineWidth) {
-            return new RectPathMaker(0, 0, arrowHeight, 0, rectRadius, lineWidth);
+            return new RectPathMaker(0, 0, arrowHeight, 0, rectRadius, lineWidth) {
+                @Override
+                protected void make(Path path, RectF rect, float center, float arrowWidth) {
+                    path.moveTo(right(), center + arrowWidth / 2);
+                    bottomRight(rect, path);
+                    bottomLeft(rect, path);
+                    topLeft(rect, path);
+                    topRight(rect, path);
+                    path.lineTo(right(), center - arrowWidth / 2);
+                }
+            };
         }
 
         @Override
@@ -104,32 +91,21 @@ public enum ArrowType {
             };
         }
 
-        @Override
-        protected PathMaker pathMaker(RectPathMaker rectPathMaker, ArrowPathMaker arrowPathMaker) {
-            return new PathMaker(rectPathMaker, arrowPathMaker) {
-                @Override
-                void make(float width, float height, float center) {
-                    // draw rect
-                    center = height / 2;
-                    path.rewind();
-                    path.moveTo(rectPathMaker.right(), center + arrowPathMaker.width() / 2);
-                    rectPathMaker.bottomRight(rect, path);
-                    rectPathMaker.bottomLeft(rect, path);
-                    rectPathMaker.topLeft(rect, path);
-                    rectPathMaker.topRight(rect, path);
-                    path.lineTo(rectPathMaker.right(), center - arrowPathMaker.width() / 2);
-
-                    // draw triangle
-                    arrowPathMaker.make(rect, path, center);
-                    path.close();
-                }
-            };
-        }
     },
     TOP {
         @Override
         protected RectPathMaker rectPathMaker(float arrowHeight, float rectRadius, float lineWidth) {
-            return new RectPathMaker(0, arrowHeight, 0, 0, rectRadius, lineWidth);
+            return new RectPathMaker(0, arrowHeight, 0, 0, rectRadius, lineWidth) {
+                @Override
+                protected void make(Path path, RectF rect, float center, float arrowWidth) {
+                    path.moveTo(center + arrowWidth / 2, top());
+                    topRight(rect, path);
+                    bottomRight(rect, path);
+                    bottomLeft(rect, path);
+                    topLeft(rect, path);
+                    path.lineTo(center - arrowWidth / 2, top());
+                }
+            };
         }
 
         @Override
@@ -142,36 +118,10 @@ public enum ArrowType {
                 }
             };
         }
-
-        @Override
-        protected PathMaker pathMaker(RectPathMaker rectPathMaker, ArrowPathMaker arrowPathMaker) {
-            return new PathMaker(rectPathMaker, arrowPathMaker) {
-                @Override
-                void make(float width, float height, float center) {
-                    // draw rect
-                    path.rewind();
-                    path.moveTo(center + arrowPathMaker.width() / 2, rectPathMaker.top());
-                    rectPathMaker.topRight(rect, path);
-                    rectPathMaker.bottomRight(rect, path);
-                    rectPathMaker.bottomLeft(rect, path);
-                    rectPathMaker.topLeft(rect, path);
-                    path.lineTo(center - arrowPathMaker.width() / 2, rectPathMaker.top());
-
-                    // draw triangle
-                    arrowPathMaker.make(rect, path, center);
-                    path.close();
-                }
-            };
-        }
     };
 
     protected abstract RectPathMaker rectPathMaker(float arrowHeight, float rectRadius, float lineWidth);
 
     protected abstract ArrowPathMaker arrowPathMaker(float arrowHeight, float arrowWidth, float arrowRadius, float lineWidth);
 
-    protected abstract PathMaker pathMaker(RectPathMaker rectPathMaker, ArrowPathMaker arrowPathMaker);
-
-    /* package */ PathMaker pathMaker(final float arrowHeight, float arrowWidth, float arrowRadius, float rectRadius, float lineWidth) {
-        return pathMaker(rectPathMaker(arrowHeight, rectRadius, lineWidth), arrowPathMaker(arrowHeight, arrowWidth, arrowRadius, lineWidth));
-    }
 }

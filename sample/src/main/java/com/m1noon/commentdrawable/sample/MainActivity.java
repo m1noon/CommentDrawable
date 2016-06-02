@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import com.m1noon.commentdrawable.ArrowGravity;
 import com.m1noon.commentdrawable.CommentDrawable;
 import com.m1noon.commentdrawable.ArrowType;
 
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
                 .triangleHeight(R.dimen.dimen_8)
                 .triangleWidth(R.dimen.dimen_16)
                 .arrowType(ArrowType.LEFT)
+                .arrowGravity(ArrowGravity.END)
+                .arrowOffset(R.dimen.dimen_8)
                 .color(R.color.app_blue)
                 .build());
 
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 .arrowType(ArrowType.RIGHT)
                 .color(R.color.app_blue_transparent)
                 .lineColor(R.color.app_gray)
+                .arrowGravity(ArrowGravity.START)
+                .arrowOffset(R.dimen.dimen_8)
                 .lineWidth(R.dimen.dimen_8)
                 .build());
 

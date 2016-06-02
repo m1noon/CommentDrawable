@@ -6,29 +6,40 @@ import android.graphics.RectF;
 /**
  * Created by m1noon on 16/06/03.
  */
-/* package */ abstract class PathMaker {
+/* package */ class PathMaker {
 
     protected RectPathMaker rectPathMaker;
     protected ArrowPathMaker arrowPathMaker;
+    protected ArrowPositionMaker arrowPositionMaker;
     protected final RectF rect = new RectF();
     protected final Path path = new Path();
 
-    PathMaker(RectPathMaker rectPathMaker, ArrowPathMaker arrowPathMaker) {
+    PathMaker(RectPathMaker rectPathMaker, ArrowPathMaker arrowPathMaker, ArrowPositionMaker arrowPositionMaker) {
         this.rectPathMaker = rectPathMaker;
         this.arrowPathMaker = arrowPathMaker;
+        this.arrowPositionMaker = arrowPositionMaker;
     }
 
     /* package */ final Path make(float width, float height) {
         rectPathMaker.setSize(width, height);
         arrowPathMaker.setSize(width, height);
-        final float centerX = width / 2;
-        make(width, height, centerX);
+        final float center = arrowPositionMaker.make(width, height, arrowPathMaker.width());
+
+        path.rewind();
+        // draw rect
+        rectPathMaker.make(path, rect, center, arrowPathMaker.width());
+        // draw triangle
+        arrowPathMaker.make(rect, path, center);
+        path.close();
         return path;
     }
 
-    abstract void make(float width, float height, float center);
+    /* package */ static abstract class ArrowPositionMaker {
 
-    /* package */ static class RectPathMaker {
+        abstract float make(float width, float height, float arrowWidth);
+    }
+
+    /* package */ static abstract class RectPathMaker {
 
         private final float leftOffset;
         private final float topOffset;
@@ -95,6 +106,8 @@ import android.graphics.RectF;
         public float bottom() {
             return bottom;
         }
+
+        protected abstract void make(Path path, RectF rect, float center, float arrowWidth);
     }
 
     /* package */ abstract static class ArrowPathMaker {

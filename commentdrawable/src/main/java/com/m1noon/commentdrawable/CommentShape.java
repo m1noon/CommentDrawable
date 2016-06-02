@@ -17,11 +17,11 @@ import android.graphics.drawable.shapes.Shape;
     private final PathMaker pathMaker;
 
 
-    public CommentShape(int color, int lineColor, float lineWidth, ArrowType arrowType, float rectRadius, float triangleHeight, float triangleWidth, float triangleRadius) {
+    public CommentShape(int color, int lineColor, float lineWidth, PathMaker pathMaker) {
         this.color = color;
         this.lineWidth = lineWidth;
         this.lineColor = lineColor;
-        pathMaker = arrowType.pathMaker(triangleHeight, triangleWidth, triangleRadius, rectRadius, lineWidth);
+        this.pathMaker = pathMaker;
     }
 
     @Override
