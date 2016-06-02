@@ -1,10 +1,9 @@
 package com.m1noon.commentdrawable;
 
 import android.graphics.Canvas;
-import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PathEffect;
+import android.graphics.RectF;
 import android.graphics.drawable.shapes.Shape;
 
 /**
@@ -20,10 +19,8 @@ import android.graphics.drawable.shapes.Shape;
     private float lineWidth;
     private int lineColor;
 
-    private final Path mRectPath = new Path();
-    private final Path mTrianglePath = new Path();
-    private PathEffect mRectPathEffect;
-    private PathEffect mTrianglePathEffect;
+    private final Path path = new Path();
+    private final RectF cornerRect = new RectF();
 
     public CommentShape(float rectRadius, float triangleHeight, float triangleWidth, float triangleRadius, int color, float lineWidth, int lineColor) {
         this.rectRadius = rectRadius;
@@ -36,60 +33,56 @@ import android.graphics.drawable.shapes.Shape;
     }
 
     @Override
-    protected void onResize(float width, float height) {
-        super.onResize(width, height);
-        float shortLine = Math.min(width, height);
-        mTrianglePathEffect = new CornerPathEffect(Math.min(triangleRadius, shortLine / 2));
-        mRectPathEffect = new CornerPathEffect(Math.min(rectRadius, shortLine / 2));
-    }
-
-    @Override
     public void draw(Canvas canvas, Paint paint) {
         paint.setAntiAlias(true);
         paint.setStrokeWidth(lineWidth);
-
         setUpPath();
 
         if (lineWidth > 0) {
             paint.setStyle(Paint.Style.STROKE);
             paint.setColor(lineColor);
-            paint.setPathEffect(mRectPathEffect);
-            canvas.drawPath(mRectPath, paint);
-            paint.setPathEffect(mTrianglePathEffect);
-            canvas.drawPath(mTrianglePath, paint);
+            canvas.drawPath(path, paint);
         }
 
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(color);
-        paint.setPathEffect(mRectPathEffect);
-        canvas.drawPath(mRectPath, paint);
-        paint.setPathEffect(mTrianglePathEffect);
-        canvas.drawPath(mTrianglePath, paint);
+        canvas.drawPath(path, paint);
     }
 
     private void setUpPath() {
-        final float offset = 100;
-
         final float top = lineWidth / 2;
         final float left = lineWidth / 2;
         final float bottom = getHeight() - lineWidth;
         final float rectBottom = bottom - triangleHeight;
         final float right = getWidth() - lineWidth / 2;
-        final float centerX = getWidth() / 2;
+        final float centerX = getWidth() / 3;
 
-        mRectPath.rewind();
-        mRectPath.moveTo(centerX + triangleWidth / 2 + offset, rectBottom);
-        mRectPath.lineTo(right, rectBottom);
-        mRectPath.lineTo(right, top);
-        mRectPath.lineTo(left, top);
-        mRectPath.lineTo(left, rectBottom);
-        mRectPath.lineTo(centerX - triangleWidth / 2 - offset, rectBottom);
+        float shortLine = Math.min(getWidth(), getHeight() - triangleHeight);
+        final float radius = Math.min(rectRadius, shortLine);
+        final float triangleRadius = Math.min(this.triangleRadius, shortLine);
 
-        mTrianglePath.rewind();
-        mTrianglePath.moveTo(centerX - triangleWidth / 2 - offset, rectBottom);
-        mTrianglePath.lineTo(centerX - triangleWidth / 2, rectBottom);
-        mTrianglePath.lineTo(centerX, bottom);
-        mTrianglePath.lineTo(centerX + triangleWidth / 2, rectBottom);
-        mTrianglePath.lineTo(centerX + triangleWidth / 2 + offset, rectBottom);
+        path.rewind();
+        path.moveTo(centerX + triangleWidth / 2, rectBottom);
+        path.lineTo(right - radius, rectBottom);
+        cornerRect.set(right - radius, rectBottom - radius, right, rectBottom);
+        path.arcTo(cornerRect, 90, -90);
+        cornerRect.set(right - radius, top, right, top + radius);
+        path.arcTo(cornerRect, 0, -90);
+        cornerRect.set(left, top, left + radius, top + radius);
+        path.arcTo(cornerRect, 270, -90);
+        cornerRect.set(left, rectBottom - radius, left + radius, rectBottom);
+        path.arcTo(cornerRect, 180, -90);
+        path.lineTo(centerX - triangleWidth / 2, rectBottom);
+
+        // draw triangle
+        final float tW = Math.max(0, triangleWidth);
+        final float tH = Math.max(0, triangleHeight);
+        final float longSide = (float) Math.sqrt((tW * tW) + 4 * (tH * tH));
+        final float bottomOffset = (longSide * triangleRadius / tW) - triangleRadius;
+        final float angle = (float) (Math.toDegrees(Math.atan(tH / (tW / 2))));
+
+        cornerRect.set(centerX - triangleRadius / 2, bottom - bottomOffset - triangleRadius, centerX + triangleRadius / 2, bottom - bottomOffset);
+        path.arcTo(cornerRect, 90 + angle, -angle * 2);
+        path.close();
     }
 }
