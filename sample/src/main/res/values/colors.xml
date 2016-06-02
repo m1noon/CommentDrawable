@@ -7,4 +7,6 @@
     <color name="app_white">#FFFFFF</color>
     <color name="app_gray">#646464</color>
     <color name="app_blue">#333399</color>
+    <color name="app_blue_transparent">#99333399</color>
+    <color name="app_black_transparent">#99000000</color>
 </resources>

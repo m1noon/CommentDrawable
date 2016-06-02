@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
                 .triangleRadius(R.dimen.dimen_4)
                 .triangleHeight(R.dimen.dimen_16)
                 .triangleWidth(R.dimen.dimen_16)
-                .color(R.color.app_gray)
+                .color(R.color.app_black_transparent)
                 .build());
 
         TextView text2 = (TextView) findViewById(R.id.text_2);
@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
                 .rectRadius(R.dimen.dimen_8)
                 .triangleHeight(R.dimen.dimen_16)
                 .triangleWidth(R.dimen.dimen_16)
-                .color(R.color.app_white)
+                .color(R.color.app_blue_transparent)
                 .lineColor(R.color.app_gray)
-                .lineWidth(R.dimen.dimen_2)
+                .lineWidth(R.dimen.dimen_8)
                 .build());
 
         TextView text4 = (TextView) findViewById(R.id.text_4);
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 .triangleRadius(R.dimen.dimen_4)
                 .triangleHeight(R.dimen.dimen_16)
                 .triangleWidth(R.dimen.dimen_16)
-                .color(R.color.app_white)
-                .lineColor(R.color.app_gray)
+                .color(R.color.app_black_transparent)
+                .lineColor(R.color.app_blue_transparent)
                 .lineWidth(R.dimen.dimen_2)
                 .build());
     }
