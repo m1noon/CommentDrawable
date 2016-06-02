@@ -19,6 +19,7 @@ public class CommentDrawable extends ShapeDrawable {
     public static class Builder {
         private Context context;
 
+        private ArrowType arrowType = ArrowType.BOTTOM;
         private float rectRadius;
         private float triangleHeight;
         private float triangleWidth;
@@ -67,8 +68,13 @@ public class CommentDrawable extends ShapeDrawable {
             return this;
         }
 
+        public Builder arrowType(ArrowType arrowType) {
+            this.arrowType = arrowType;
+            return this;
+        }
+
         public ShapeDrawable build() {
-            return new ShapeDrawable(new CommentShape(rectRadius, triangleHeight, triangleWidth, triangleRadius, color, lineWidth, lineColor));
+            return new ShapeDrawable(new CommentShape(color, lineColor, lineWidth, arrowType, rectRadius, triangleHeight, triangleWidth, triangleRadius));
         }
 
     }
