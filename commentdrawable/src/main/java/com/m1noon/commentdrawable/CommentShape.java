@@ -15,7 +15,7 @@ import android.graphics.drawable.shapes.Shape;
     private int lineColor;
 
     private final PathMaker pathMaker;
-
+    private Path path;
 
     public CommentShape(int color, int lineColor, float lineWidth, PathMaker pathMaker) {
         this.color = color;
@@ -25,10 +25,18 @@ import android.graphics.drawable.shapes.Shape;
     }
 
     @Override
+    protected void onResize(float width, float height) {
+        super.onResize(width, height);
+        path = pathMaker.make(width, height);
+    }
+
+    @Override
     public void draw(Canvas canvas, Paint paint) {
+        if (path == null) {
+            path = pathMaker.make(getWidth(), getHeight());
+        }
         paint.setAntiAlias(true);
         paint.setStrokeWidth(lineWidth);
-        final Path path = pathMaker.make(getWidth(), getHeight());
 
         if (lineWidth > 0) {
             paint.setStyle(Paint.Style.STROKE);
