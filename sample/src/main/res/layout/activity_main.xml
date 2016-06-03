@@ -69,5 +69,27 @@
             android:text="Round Comment."
             android:textColor="@android:color/black"
             android:textSize="20sp" />
+
+        <com.m1noon.commentdrawable.CommentTextView
+            android:id="@+id/text_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_8"
+            android:paddingBottom="@dimen/dimen_16"
+            android:paddingLeft="@dimen/dimen_16"
+            android:paddingRight="@dimen/dimen_16"
+            android:paddingTop="@dimen/dimen_16"
+            android:text="This is CommentTextView."
+            android:textColor="@color/app_white"
+            app:cd_arrowGravity="end"
+            app:cd_arrowHeight="@dimen/dimen_16"
+            app:cd_arrowOffset="@dimen/dimen_16"
+            app:cd_arrowRadius="@dimen/dimen_2"
+            app:cd_arrowType="bottom"
+            app:cd_arrowWidth="@dimen/dimen_8"
+            app:cd_color="@color/app_gray"
+            app:cd_lineColor="@color/app_blue"
+            app:cd_lineWidth="@dimen/dimen_1"
+            app:cd_rectRadius="@dimen/dimen_8" />
     </LinearLayout>
 </LinearLayout>

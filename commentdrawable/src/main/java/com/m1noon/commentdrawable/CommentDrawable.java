@@ -16,6 +16,10 @@ public class CommentDrawable extends ShapeDrawable {
         return new Builder(context);
     }
 
+    public CommentDrawable(CommentShape s) {
+        super(s);
+    }
+
     public static class Builder {
         private Context context;
 
@@ -40,8 +44,18 @@ public class CommentDrawable extends ShapeDrawable {
             return this;
         }
 
+        public Builder rectRadius(float radius) {
+            rectRadius = radius;
+            return this;
+        }
+
         public Builder arrowHeight(@DimenRes int dimenRes) {
             arrowHeight = context.getResources().getDimension(dimenRes);
+            return this;
+        }
+
+        public Builder arrowHeight(float arrowHeight) {
+            this.arrowHeight = arrowHeight;
             return this;
         }
 
@@ -50,13 +64,28 @@ public class CommentDrawable extends ShapeDrawable {
             return this;
         }
 
+        public Builder arrowWidth(float arrowWidth) {
+            this.arrowWidth = arrowWidth;
+            return this;
+        }
+
         public Builder arrowRadius(@DimenRes int dimenRes) {
             arrowRadius = context.getResources().getDimension(dimenRes);
             return this;
         }
 
-        public Builder color(@ColorRes int colorRes) {
+        public Builder arrowRadius(float radius) {
+            arrowRadius = radius;
+            return this;
+        }
+
+        public Builder colorRes(@ColorRes int colorRes) {
             color = ContextCompat.getColor(context, colorRes);
+            return this;
+        }
+
+        public Builder color(int color) {
+            this.color = color;
             return this;
         }
 
@@ -65,8 +94,18 @@ public class CommentDrawable extends ShapeDrawable {
             return this;
         }
 
-        public Builder lineColor(@ColorRes int colorRes) {
+        public Builder lineWidth(float width) {
+            this.lineWidth = width;
+            return this;
+        }
+
+        public Builder lineColorRes(@ColorRes int colorRes) {
             lineColor = ContextCompat.getColor(context, colorRes);
+            return this;
+        }
+
+        public Builder lineColor(int color) {
+            lineColor = color;
             return this;
         }
 
@@ -85,11 +124,19 @@ public class CommentDrawable extends ShapeDrawable {
             return this;
         }
 
-        public ShapeDrawable build() {
-            return new ShapeDrawable(new CommentShape(color, lineColor, lineWidth,
-                    new PathMaker(arrowType.rectPathMaker(arrowHeight, rectRadius, lineWidth),
-                            arrowType.arrowPathMaker(arrowHeight, arrowWidth, arrowRadius, lineWidth),
-                            arrowGravity.arrowPositionMaker(arrowOffset == 0 ? arrowWidth * 2 : arrowOffset, arrowType))));
+        public Builder arrowOffset(float offset) {
+            this.arrowOffset = offset;
+            return this;
+        }
+
+        public CommentDrawable build() {
+            return new CommentDrawable(
+                    new CommentShape(color, lineColor, lineWidth,
+                            new PathMaker(
+                                    arrowType.rectPathMaker(arrowHeight, rectRadius, lineWidth),
+                                    arrowType.arrowPathMaker(arrowHeight, arrowWidth, arrowRadius, lineWidth),
+                                    arrowGravity.arrowPositionMaker(arrowOffset == 0 ? arrowWidth * 2 : arrowOffset, arrowType))
+                    ));
         }
 
     }

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
                 .arrowRadius(R.dimen.dimen_4)
                 .arrowHeight(R.dimen.dimen_16)
                 .arrowWidth(R.dimen.dimen_16)
-                .color(R.color.app_black_transparent)
+                .colorRes(R.color.app_black_transparent)
                 .build());
 
         TextView text2 = (TextView) findViewById(R.id.text_2);
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 .arrowType(ArrowType.LEFT)
                 .arrowGravity(ArrowGravity.END)
                 .arrowOffset(R.dimen.dimen_8)
-                .color(R.color.app_blue)
+                .colorRes(R.color.app_blue)
                 .build());
 
         TextView text3 = (TextView) findViewById(R.id.text_3);
@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
                 .arrowHeight(R.dimen.dimen_16)
                 .arrowWidth(R.dimen.dimen_16)
                 .arrowType(ArrowType.RIGHT)
-                .color(R.color.app_blue_transparent)
-                .lineColor(R.color.app_gray)
+                .colorRes(R.color.app_blue_transparent)
+                .lineColorRes(R.color.app_gray)
                 .arrowGravity(ArrowGravity.START)
                 .arrowOffset(R.dimen.dimen_8)
                 .lineWidth(R.dimen.dimen_8)
@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 .arrowRadius(R.dimen.dimen_4)
                 .arrowHeight(R.dimen.dimen_16)
                 .arrowWidth(R.dimen.dimen_16)
-                .color(R.color.app_black_transparent)
-                .lineColor(R.color.app_blue_transparent)
+                .colorRes(R.color.app_black_transparent)
+                .lineColorRes(R.color.app_blue_transparent)
                 .lineWidth(R.dimen.dimen_2)
                 .build());
     }

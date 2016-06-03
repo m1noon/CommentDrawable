@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CommentTextView" >
+        <attr name="cd_rectRadius" format="dimension" />
+        <attr name="cd_arrowHeight" format="dimension" />
+        <attr name="cd_arrowWidth" format="dimension" />
+        <attr name="cd_arrowRadius" format="dimension" />
+        <attr name="cd_color" format="color" />
+        <attr name="cd_lineWidth" format="dimension" />
+        <attr name="cd_lineColor" format="color" />
+        <attr name="cd_arrowOffset" format="dimension" />
+        <attr name="cd_arrowType" format="enum">
+            <enum name="left" value="0" />
+            <enum name="top" value="1" />
+            <enum name="right" value="2" />
+            <enum name="bottom" value="3" />
+        </attr>
+        <attr name="cd_arrowGravity" format="enum">
+            <enum name="start" value="0" />
+            <enum name="end" value="1" />
+            <enum name="center" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>
