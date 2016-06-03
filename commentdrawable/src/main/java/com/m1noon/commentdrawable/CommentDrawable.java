@@ -40,17 +40,17 @@ public class CommentDrawable extends ShapeDrawable {
             return this;
         }
 
-        public Builder triangleHeight(@DimenRes int dimenRes) {
+        public Builder arrowHeight(@DimenRes int dimenRes) {
             arrowHeight = context.getResources().getDimension(dimenRes);
             return this;
         }
 
-        public Builder triangleWidth(@DimenRes int dimenRes) {
+        public Builder arrowWidth(@DimenRes int dimenRes) {
             arrowWidth = context.getResources().getDimension(dimenRes);
             return this;
         }
 
-        public Builder triangleRadius(@DimenRes int dimenRes) {
+        public Builder arrowRadius(@DimenRes int dimenRes) {
             arrowRadius = context.getResources().getDimension(dimenRes);
             return this;
         }

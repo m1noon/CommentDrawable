@@ -28,7 +28,7 @@ import android.graphics.RectF;
         path.rewind();
         // draw rect
         rectPathMaker.make(path, rect, center, arrowPathMaker.width());
-        // draw triangle
+        // draw arrow
         arrowPathMaker.make(rect, path, center);
         path.close();
         return path;
