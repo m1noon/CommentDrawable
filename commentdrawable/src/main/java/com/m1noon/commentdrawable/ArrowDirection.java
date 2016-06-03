@@ -9,7 +9,7 @@ import com.m1noon.commentdrawable.PathMaker.RectPathMaker;
 /**
  * Created by m1noon on 16/06/03.
  */
-public enum ArrowType {
+public enum ArrowDirection {
     LEFT {
         @Override
         protected RectPathMaker rectPathMaker(float arrowHeight, float rectRadius, float lineWidth) {
@@ -37,7 +37,7 @@ public enum ArrowType {
             };
         }
     },
-    TOP {
+    UP {
         @Override
         protected RectPathMaker rectPathMaker(float arrowHeight, float rectRadius, float lineWidth) {
             return new RectPathMaker(0, arrowHeight, 0, 0, rectRadius, lineWidth) {
@@ -92,7 +92,7 @@ public enum ArrowType {
         }
 
     },
-    BOTTOM {
+    DOWN {
         @Override
         protected RectPathMaker rectPathMaker(float arrowHeight, float rectRadius, float lineWidth) {
             return new RectPathMaker(0, 0, 0, arrowHeight, rectRadius, lineWidth) {

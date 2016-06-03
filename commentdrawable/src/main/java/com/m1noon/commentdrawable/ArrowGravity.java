@@ -6,7 +6,7 @@ package com.m1noon.commentdrawable;
 public enum ArrowGravity {
     START {
         @Override
-        public PathMaker.ArrowPositionMaker arrowPositionMaker(final float offset, final ArrowType arrowType) {
+        public PathMaker.ArrowPositionMaker arrowPositionMaker(final float offset, final ArrowDirection arrowDirection) {
             return new PathMaker.ArrowPositionMaker() {
                 @Override
                 float make(float width, float height, float arrowWidth) {
@@ -17,33 +17,33 @@ public enum ArrowGravity {
     },
     END {
         @Override
-        public PathMaker.ArrowPositionMaker arrowPositionMaker(final float offset, final ArrowType arrowType) {
+        public PathMaker.ArrowPositionMaker arrowPositionMaker(final float offset, final ArrowDirection arrowDirection) {
             return new PathMaker.ArrowPositionMaker() {
                 @Override
                 float make(float width, float height, float arrowWidth) {
-                    return getArrowLine(arrowType, width, height) - offset - arrowWidth / 2;
+                    return getArrowLine(arrowDirection, width, height) - offset - arrowWidth / 2;
                 }
             };
         }
     },
     CENTER {
         @Override
-        public PathMaker.ArrowPositionMaker arrowPositionMaker(float offset, final ArrowType arrowType) {
+        public PathMaker.ArrowPositionMaker arrowPositionMaker(float offset, final ArrowDirection arrowDirection) {
             return new PathMaker.ArrowPositionMaker() {
                 @Override
                 float make(float width, float height, float arrowWidth) {
-                    return getArrowLine(arrowType, width, height) / 2;
+                    return getArrowLine(arrowDirection, width, height) / 2;
                 }
             };
         }
     };
 
-    abstract PathMaker.ArrowPositionMaker arrowPositionMaker(float offset, ArrowType arrowType);
+    abstract PathMaker.ArrowPositionMaker arrowPositionMaker(float offset, ArrowDirection arrowDirection);
 
-    protected float getArrowLine(ArrowType arrowType, float width, float height) {
-        switch (arrowType) {
-            case BOTTOM:
-            case TOP:
+    protected float getArrowLine(ArrowDirection arrowDirection, float width, float height) {
+        switch (arrowDirection) {
+            case DOWN:
+            case UP:
                 return width;
             case LEFT:
             case RIGHT:

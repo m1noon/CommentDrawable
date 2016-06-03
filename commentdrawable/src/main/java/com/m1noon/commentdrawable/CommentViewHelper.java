@@ -17,14 +17,14 @@ public class CommentViewHelper {
     public static void setUp(Context context, AttributeSet attrs, View view) {
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.CommentTextView);
 
-        final ArrowType arrowType = ArrowType.values()[attr.getInt(R.styleable.CommentTextView_cd_arrowType, ArrowType.BOTTOM.ordinal())];
+        final ArrowDirection arrowDirection = ArrowDirection.values()[attr.getInt(R.styleable.CommentTextView_cd_arrowDirection, ArrowDirection.DOWN.ordinal())];
         final float arrowHeight = attr.getDimension(R.styleable.CommentTextView_cd_arrowHeight, 0); // TODO default height
 
         view.setPadding(
-                view.getPaddingLeft() + (arrowType == ArrowType.LEFT ? (int) arrowHeight : 0),
-                view.getPaddingTop() + (arrowType == ArrowType.TOP ? (int) arrowHeight : 0),
-                view.getPaddingRight() + (arrowType == ArrowType.RIGHT ? (int) arrowHeight : 0),
-                view.getPaddingBottom() + (arrowType == ArrowType.BOTTOM ? (int) arrowHeight : 0)
+                view.getPaddingLeft() + (arrowDirection == ArrowDirection.LEFT ? (int) arrowHeight : 0),
+                view.getPaddingTop() + (arrowDirection == ArrowDirection.UP ? (int) arrowHeight : 0),
+                view.getPaddingRight() + (arrowDirection == ArrowDirection.RIGHT ? (int) arrowHeight : 0),
+                view.getPaddingBottom() + (arrowDirection == ArrowDirection.DOWN ? (int) arrowHeight : 0)
         );
 
         view.setBackground(CommentDrawable.builder(context)
@@ -36,7 +36,7 @@ public class CommentViewHelper {
                 .lineWidth(attr.getDimension(R.styleable.CommentTextView_cd_lineWidth, 0))
                 .lineColor(attr.getColor(R.styleable.CommentTextView_cd_lineColor, Color.LTGRAY))
                 .arrowOffset(attr.getDimension(R.styleable.CommentTextView_cd_arrowOffset, 0))
-                .arrowType(arrowType)
+                .arrowDirection(arrowDirection)
                 .arrowGravity(ArrowGravity.values()[attr.getInt(R.styleable.CommentTextView_cd_arrowGravity, ArrowGravity.CENTER.ordinal())])
                 .build());
 

@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.m1noon.commentdrawable.ArrowGravity;
 import com.m1noon.commentdrawable.CommentDrawable;
-import com.m1noon.commentdrawable.ArrowType;
+import com.m1noon.commentdrawable.ArrowDirection;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 .arrowRadius(R.dimen.dimen_2)
                 .arrowHeight(R.dimen.dimen_8)
                 .arrowWidth(R.dimen.dimen_16)
-                .arrowType(ArrowType.LEFT)
+                .arrowDirection(ArrowDirection.LEFT)
                 .arrowGravity(ArrowGravity.END)
                 .arrowOffset(R.dimen.dimen_8)
                 .colorRes(R.color.app_blue)
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 .rectRadius(R.dimen.dimen_8)
                 .arrowHeight(R.dimen.dimen_16)
                 .arrowWidth(R.dimen.dimen_16)
-                .arrowType(ArrowType.RIGHT)
+                .arrowDirection(ArrowDirection.RIGHT)
                 .colorRes(R.color.app_blue_transparent)
                 .lineColorRes(R.color.app_gray)
                 .arrowGravity(ArrowGravity.START)

@@ -23,7 +23,7 @@ public class CommentDrawable extends ShapeDrawable {
     public static class Builder {
         private Context context;
 
-        private ArrowType arrowType = ArrowType.BOTTOM;
+        private ArrowDirection arrowDirection = ArrowDirection.DOWN;
         private ArrowGravity arrowGravity = ArrowGravity.CENTER;
         private float rectRadius;
         private float arrowHeight;
@@ -109,8 +109,8 @@ public class CommentDrawable extends ShapeDrawable {
             return this;
         }
 
-        public Builder arrowType(ArrowType arrowType) {
-            this.arrowType = arrowType;
+        public Builder arrowDirection(ArrowDirection arrowDirection) {
+            this.arrowDirection = arrowDirection;
             return this;
         }
 
@@ -133,9 +133,9 @@ public class CommentDrawable extends ShapeDrawable {
             return new CommentDrawable(
                     new CommentShape(color, lineColor, lineWidth,
                             new PathMaker(
-                                    arrowType.rectPathMaker(arrowHeight, rectRadius, lineWidth),
-                                    arrowType.arrowPathMaker(arrowHeight, arrowWidth, arrowRadius, lineWidth),
-                                    arrowGravity.arrowPositionMaker(arrowOffset == 0 ? arrowWidth * 2 : arrowOffset, arrowType))
+                                    arrowDirection.rectPathMaker(arrowHeight, rectRadius, lineWidth),
+                                    arrowDirection.arrowPathMaker(arrowHeight, arrowWidth, arrowRadius, lineWidth),
+                                    arrowGravity.arrowPositionMaker(arrowOffset == 0 ? arrowWidth * 2 : arrowOffset, arrowDirection))
                     ));
         }
 
